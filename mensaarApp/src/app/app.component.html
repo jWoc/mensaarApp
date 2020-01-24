@@ -1,0 +1,130 @@
+<ion-app>
+  <!-- Side Menu Layout -->
+  <ion-menu contentId="menu" type="overlay" side="end" (ionDidClose)="hideMealSetting()">
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          {{ 'MENU.setting' | translate }}
+        </ion-title>
+        <ion-buttons class="app-menu-button" slot="end">
+          <ion-menu-button class="menu-button"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content>
+      <ion-list>
+
+        <!-- Choose Favorite Mensa -->
+        <ion-item lines="none">
+          <ion-icon slot="start" name="home"></ion-icon>
+          <ion-select mode="md" placeholder="{{ 'MENU.mensaSettingPlaceholder' | translate }}" [value]="selectedMensa"
+            interface="popover" (ionChange)="selectMensa($event)" placeholder="Favorisiere eine Mensa">
+            <ion-select-option *ngFor="let mensa of mensas" value="{{mensa.value}}">{{ mensa.text | translate}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Select Language -->
+        <ion-item lines="none">
+          <ion-icon slot="start" name="flag"></ion-icon>
+          <ion-select class="ion-select-language" mode="md"
+            placeholder="{{ 'MENU.languageSettingPlaceholder' | translate }}" [value]="selectedLanguage"
+            interface="popover" (ionChange)="selectLanguage($event)">
+            <ion-select-option *ngFor="let lng of languages" value="{{lng.value}}">{{ lng.text }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Toggle the meal settings -->
+        <ion-item class="ion-meal-settings" tappable (click)="toggleMealSettings()" lines="none">
+
+          <ion-icon slot="start" name="pizza"></ion-icon>
+          <ion-label>{{ 'MENU.mealSetting' | translate }}</ion-label>
+          <ion-icon class="iconDropdown" name="arrow-dropdown" mode="md" *ngIf="isHiddenMealSettings"></ion-icon>
+          <ion-icon class="iconDropdown" name="arrow-dropup" mode="md" *ngIf="!isHiddenMealSettings"></ion-icon>
+        </ion-item>
+
+        <!-- List of meal settings: Components, Allergens, Prices, Closed Counters -->
+        <ion-list class="ion-meal-settings-list ion-no-margin" [hidden]=isHiddenMealSettings>
+          <ion-item class="meal-settings" (click)="saveMealSetting(SHOW_MEAL_COMPONENTS)" lines="none">
+            <ion-label>{{ 'MENU.mealComponents' | translate }}</ion-label>
+            <ion-checkbox [(ngModel)]="storageService.showMealComponents" color="primary" slot="end"></ion-checkbox>
+          </ion-item>
+          <ion-item class="meal-settings" (click)="saveMealSetting(SHOW_ALLERGENS)" lines="none">
+            <ion-label>{{ 'MENU.allergens' | translate }}</ion-label>
+            <ion-checkbox [(ngModel)]="storageService.showAllergens" color="primary" slot="end"></ion-checkbox>
+          </ion-item>
+          <ion-item class="meal-settings" (click)="saveMealSetting(SHOW_PRICES)" lines="none">
+            <ion-label>{{ 'MENU.prices' | translate }}</ion-label>
+            <ion-checkbox [(ngModel)]="storageService.showPrices" color="primary" slot="end"></ion-checkbox>
+          </ion-item>
+          <ion-item class="meal-settings" (click)="saveMealSetting(SHOW_CLOSED_COUNTERS)" lines="none">
+            <ion-label>{{ 'MENU.closedCounters' | translate }}</ion-label>
+            <ion-checkbox [(ngModel)]="storageService.showClosedCounters" color="primary" slot="end"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+
+
+
+        <!-- Choose Brightness Mode -->
+        <ion-item lines="none">
+          <ion-icon slot="start" name="sunny"></ion-icon>
+          <ion-select interface="popover" (ionChange)="selectBrightnessMode($event)"
+            [(ngModel)]="storageService.chosenBrightness" [selectedText]="(storageService.chosenBrightness === 'automatic') ?
+                (brightnessModes[storageService.chosenBrightness] | translate) : undefined">
+            <ion-select-option *ngFor="let mode of brightnessModes | keyvalue asnyc" value="{{ mode.key }}">
+              {{ mode.value | translate }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+        <!-- Toggle the Food Alarm -->
+        <ion-item (click)="toggleFoodAlarm()" lines="none">
+          <ion-icon slot="start" name="notifications"></ion-icon>
+          <ion-label>Food Alarm</ion-label>
+          <ion-checkbox [(ngModel)]="foodAlarm" color="primary" slot="end"></ion-checkbox>
+        </ion-item>
+
+        <!-- Go to Favorite Food Page -->
+        <ion-item lines="none" routerLink="favorite-food" routerDirection="forward" (click)="hideMenu()">
+          <ion-icon slot="start" name="heart"></ion-icon>
+          <ion-label>{{ 'MENU.favoriteFoodPage' | translate }}</ion-label>
+        </ion-item>
+
+
+        <!-- Toggle the Allergen filter settings -->
+        <ion-item tappable (click)="toggleFilterSettings()" lines="none">
+          <ion-icon slot="start" name="funnel"></ion-icon>
+          <ion-label>{{ 'MENU.filterAllergens' | translate }}</ion-label>
+          <ion-icon class="iconDropdown" name="arrow-dropdown" mode="md" *ngIf="isHiddenFiltering"></ion-icon>
+          <ion-icon class="iconDropdown" name="arrow-dropup" mode="md" *ngIf="!isHiddenFiltering"></ion-icon>
+        </ion-item>
+
+        <!-- Checkboxes in a List for all Allergens-->
+        <ion-list class="ion-no-margin" [hidden]=isHiddenFiltering>
+          <ion-item *ngFor="let entry of storageService.allergens| keyvalue" (click)="saveFilterSettings(entry.key)">
+            <ion-label>{{entry.value.displayName}}</ion-label>
+            <ion-checkbox slot="end" [(ngModel)]="entry.value.isChecked"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+
+        <!-- View Privacy Notice -->
+        <ion-item lines="none" (click)="openPrivacyBrowser()" class="privacy-notice-reference">
+          <ion-icon slot="start" name="information-circle"></ion-icon>
+          <ion-label>{{ 'MENU.privacyNotice' | translate }}</ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+
+    <ion-footer class="footer">
+      <img class="logo ion-padding" src="../assets/studentenwerk-logo.png">
+    </ion-footer>
+
+  </ion-menu>
+
+  <ion-router-outlet id="menu" animated="false"></ion-router-outlet>
+</ion-app>

@@ -1,0 +1,63 @@
+{
+    "BUTTONS": {},
+    "MENU": {
+        "setting": "Einstellungen",
+        "languageSettingPlaceholder": "Wähle eine Sprache",
+        "mensaSettingPlaceholder": "Wähle eine Mensa",
+        "mealSetting": "Gerichtseinstellungen",
+        "mealComponents": "Zutaten",
+        "allergens": "Allergene",
+        "prices": "Preise",
+        "closedCounters": "Geschlossene Ausgaben",
+        "privacyNotice": "Datenschutzerklärung",
+        "favoriteFoodPage": "Lieblingsessen",
+        "filterAllergens": "Allergene filtern",
+        "darkmodeAutomatic": "Automatisch",
+        "darkmodePlaceholder": "Wähle Helligkeitsmodus"
+    },
+    "HOME": {
+        "title": "Mensas"
+    },
+    "MENSA": {
+        "title": "Mensa",
+        "noFavorite": "Kein Favorit",
+        "noDataH1": "Kein Speiseplan verfügbar.",
+        "noDataH2": "Vielleicht hat die Mensa geschlossen?"
+    },
+    "COUNTERS": {
+        "openingHours": "Öffnungszeiten",
+        "allCountersClosed": "Alle Essensausgaben sind momentan geschlossen."
+    },
+    "FEEDBACK": {
+        "instruction": "Bewerten",
+        "title": "Feedback",
+        "OPTIONS": {
+            "delicious": "köstlich",
+            "little": "zu wenig",
+            "sweet": "zu süß",
+            "salty": "zu salzig",
+            "expensive": "zu teuer",
+            "fat": "zu fettig",
+            "spicy": "zu scharf",
+            "bland": "zu fade"
+        },
+        "feedbacktextarea": "Gib hier dein Feedback ein",
+        "send": "Abschicken",
+        "errorAlertTitle": "Fehler",
+        "wrongInputTitle": "Warnung",
+        "wrongInputSubTitle": "Ungültige Eingabe",
+        "wrongInputMessage": "Du hast kein Feedback angegeben. Verteile Sterne, wähle eine der Optionen oder schick uns eine Nachricht über das Textfeld.",
+        "successToast": "Feedback wurde erfolgreich übermittelt"
+    },
+    "FAVORITEFOODPAGE": {
+        "title": "Lieblingsessen",
+        "messageEmpty": "Du hast bisher keine Mahlzeiten favorisiert."
+    },
+    "FOODALARM": {
+        "title": "Lieblingsessen",
+        "message": "Heute auf dem Plan"
+    },
+    "INTERNET": {
+        "connection": "Keine Internetverbindung"
+    }
+}

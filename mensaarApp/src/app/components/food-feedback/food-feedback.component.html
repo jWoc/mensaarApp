@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar class="ion-no-padding">
+
+
+    <ion-title class="feedbackmodal-title">
+      {{ 'FEEDBACK.title' | translate }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button class="exitButton" size="small" (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="modalFeedback">
+    <ion-item class="roundBox ion-text-wrap foodName" lines="none">
+      <ion-label class="ion-text-wrap ion-text-center">
+        <h1>{{mealName}}</h1>
+      </ion-label>
+    </ion-item>
+
+    <!-- Give star rating -->
+    <ion-label class="ion-no-padding ion-text-center">
+      <div class="ion-no-padding starRating">
+        <ion-icon icon-only class="starRatingIcon ion-no-padding ion-no-margin" name="star"
+          *ngFor="let num of [1,2,3,4,5]" (click)="rate(num)" [ngStyle]="{'color':getColor(num)}"></ion-icon>
+      </div>
+    </ion-label>
+
+    <!-- shows click options -->
+    <ion-grid class="ion-no-padding feedbackOptions">
+      <ion-row class="ion-no-padding" *ngFor="let feedbackOptions of feedbackOptionsCols; index as rowIndex">
+        <ion-col *ngFor="let feedbackOption of feedbackOptions; index as colIndex">
+          <ion-item class="roundBox ion-no-border ion-no-padding" lines="none">
+            <ion-checkbox mode="ios" (click)="addValue($event, feedbackOption, rowIndex, colIndex)"></ion-checkbox>
+            <ion-label class="checkBoxText">{{ feedbackOption | translate }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <!-- Enter feedback as text -->
+    <ion-item expand="block" class="roundBox inputFeedback ion-margin-top ion-no-padding" lines="none">
+      <ion-textarea #feedbackText class="ion-text-start ion-margin-horizontal"
+        placeholder="{{ 'FEEDBACK.feedbacktextarea' | translate }}" type="text"></ion-textarea>
+    </ion-item>
+  </div>
+
+</ion-content>
+
+<ion-footer class="footerfeedback">
+  <ion-toolbar class="ion-no-padding footerToolbar">
+    <ion-label class="ion-text-center">
+      <ion-button class="send-feedback-button" expand="block" (click)="sendFeedback()">{{ 'FEEDBACK.send' | translate}}
+      </ion-button>
+    </ion-label>
+
+  </ion-toolbar>
+</ion-footer>

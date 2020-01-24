@@ -1,0 +1,70 @@
+
+ion-fab {
+    top: 7px;
+    right: calc(7px + var(--ion-safe-area-right, 0px));
+    flex-direction: row;
+}
+
+ion-fab-button {
+    height:30px !important;
+    width: 30px !important;
+    --background: none;
+    --background-activated: none;
+    --box-shadow: none;   
+}
+
+ion-footer {
+    box-shadow: 0 -5px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+ion-segment-button {
+    min-width: 70px;
+    border: none;
+  }
+
+ion-card {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+ion-feedback-icon {
+    font-size: 15px; 
+}
+
+.mealTitle {
+    margin-right: 30px !important;
+    padding-bottom: 8px !important;
+}
+
+.priceRow {
+    margin-top: 7px;
+}
+.priceLabel {
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 5px; 
+}
+
+.openingHours {
+    font-size: 13px !important; 
+}
+
+.allergens_normal {
+    font-size: 12px !important;
+}
+
+.allergens_danger {
+    font-size: 12px !important;
+    font-weight: 800;
+}
+
+
+.feedback {
+    font-size: 12px !important;
+    padding-top: 2px;
+}
+

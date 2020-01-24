@@ -1,0 +1,27 @@
+ion-content {
+    ion-list {
+        ion-card {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: center;
+            align-content: center;
+        
+            ion-fab {
+                ion-fab-button {
+                    --background: none;
+                    --background-activated: none;
+                    --box-shadow: none;   
+                }
+            }
+        
+            ion-card-header {
+                max-width: 85%;
+            }
+        
+            &.messageEmpty {
+                font-size: 18px;
+            }
+        }
+    }
+}

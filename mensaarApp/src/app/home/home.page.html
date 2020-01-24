@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="homepage-title">
+      {{ 'HOME.title' | translate }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- List of Mensas and descriptions -->
+<ion-content>
+
+  <ion-label class="ion-padding ion-text-center" *ngIf="!networkStatus">
+    <ion-text color="dark">
+      <ion-row class="ion-justify-content-center ion-align-items-center" style='height: calc(100% - 60px)'>
+        <ion-col>
+          <ion-icon size="large" name="wifi"></ion-icon>
+          <h2>{{ 'INTERNET.connection' | translate }}</h2>
+          <ion-button size="small" fill="outline" style="padding-top: 5px" (click)="tryAgain()">Try again</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-text>
+  </ion-label>
+
+  <ion-list *ngIf="networkStatus">
+    <ion-item *ngFor="let key of keys" expand="block" routerLink="/mensa/{{ key }}" routerDirection="forward" class="mensa-navigation">
+      <ion-label class="ion-text-wrap">
+        <h2>{{ mensaList[key].displayName }}</h2>
+        <p >{{ mensaList[key].description }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

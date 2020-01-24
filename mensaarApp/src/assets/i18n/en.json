@@ -1,0 +1,63 @@
+{
+    "BUTTONS": {},
+    "MENU": {
+        "setting": "Settings",
+        "languageSettingPlaceholder": "Select a language",
+        "mensaSettingPlaceholder": "Select a mensa",
+        "mealSetting": "Meal Settings",
+        "mealComponents": "Meal Components",
+        "allergens": "Allergens",
+        "prices": "Prices",
+        "closedCounters": "Closed Counters",
+        "privacyNotice": "Privacy Notice",
+        "favoriteFoodPage": "Favorite Meals",
+        "filterAllergens": "Filter Allergens",
+        "darkmodeAutomatic": "Automatic",
+        "darkmodePlaceholder": "Choose Brightnessmode"
+    },
+    "HOME": {
+        "title": "Mensas"
+    },
+    "MENSA": {
+        "title": "Mensa",
+        "noFavorite": "No favorite mensa",
+        "noDataH1": "No meal data provided.",
+        "noDataH2": "Could it be that the mensa is closed?"
+    },
+    "COUNTERS": {
+        "openingHours": "Opening Hours",
+        "allCountersClosed": "All counters are closed at the moment."
+    },
+    "FEEDBACK": {
+        "instruction": "Rate Meal",
+        "title": "Feedback",
+        "OPTIONS": {
+            "delicious": "delicious",
+            "little": "too little",
+            "sweet": "too sweet",
+            "salty": "too salty",
+            "expensive": "expensive",
+            "fat": "too fat",
+            "spicy": "too spicy",
+            "bland": "too bland"
+        },
+        "feedbacktextarea": "Enter your Feedback here",
+        "send": "Send",
+        "errorAlertTitle": "Error",
+        "wrongInputTitle": "Warning",
+        "wrongInputSubTitle": "Invalid Input",
+        "wrongInputMessage": "You have not submitted any feedback. Choose between one or five stars, select an option or send us other feedback via the text field.",
+        "successToast": "Feedback transmitted successfully!"
+    },
+    "FAVORITEFOODPAGE": {
+        "title": "Favorite Meals",
+        "messageEmpty": "You have not preferred any meals so far."
+    },
+    "FOODALARM": {
+        "title": "Favorite Meals",
+        "message": "Today served"
+    },
+    "INTERNET": {
+        "connection": "No internet connection"
+    }
+}

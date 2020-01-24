@@ -1,0 +1,156 @@
+<!-- Page that displays meals for a certain mensa -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="networkStatus" class="mensapage-title">{{mensaName}}</ion-title>
+    <ion-title *ngIf="!networkStatus" class="mensapage-title">Mensa</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-top">
+
+  <ion-label class="ion-padding ion-text-center" *ngIf="!networkStatus">
+    <ion-text color="dark">
+      <ion-row class="ion-justify-content-center ion-align-items-center" style='height: calc(100% - 76px)'>
+        <ion-col>
+          <ion-icon size="large" name="wifi"></ion-icon>
+          <h2>{{ 'INTERNET.connection' | translate }}</h2>
+          <ion-button size="small" fill="outline" style="padding-top: 5px" (click)="tryAgain()">Try again</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-text>
+  </ion-label>
+
+  <div *ngIf="networkStatus">
+
+    <ion-label class="ion-padding ion-text-center" *ngIf="loaded && !mealDataProvided">
+      <ion-text color="dark">
+        <h2> {{ 'MENSA.noDataH1' | translate }}</h2>
+        <h2> {{ 'MENSA.noDataH2' | translate }}</h2>
+      </ion-text>
+    </ion-label>
+
+    <!-- Display the single counters -->
+    <div class="ion-no-padding ion-padding-horizontal" *ngFor="let meal of meals; let idx = index">
+      <div class="ion-no-padding ion-no-margin"
+        *ngIf="storageService.showClosedCounters==false && openedCounters[idx]==true || storageService.showClosedCounters==true">
+
+        <!-- show counter information -->
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="7">
+              <ion-label>
+                <ion-text color="dark">
+                  <h2>{{meal.displayName}}</h2>
+                </ion-text>
+                <p>{{meal.description}}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col class="ion-align-self-center ion-text-right">
+              <ion-label>
+                <p class="openingHours"> {{ 'COUNTERS.openingHours' | translate }} </p>
+                <p> {{meal.openingHours.start | date:'HH:mm': 'UTC'}} -
+                  {{meal.openingHours.end | date:'HH:mm': 'UTC'}}</p>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+        <!-- show meal information -->
+        <ion-card class="meal-card ion-padding-horizontal ion-no-margin ion-margin-bottom"
+          [ngStyle]="{'border-left': '10px solid rgb(' + meal.color.r +',' +meal.color.g + ',' + meal.color.b + ')'}"
+          *ngFor="let item of meal.meals" (click)="presentFeedbackModal(item, meal.id)">
+
+          <!-- Favorite Button -->
+          <ion-fab vertical="top" horizontal="end" slot="fixed">
+            <ion-fab-button *ngIf="!isFavorite(item.name)" (click)="doMealFavorite($event, item.name)">
+              <ion-icon color="primary" name="heart-empty"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button *ngIf="isFavorite(item.name)" (click)="removeMealFavorite($event, item.name)">
+              <ion-icon color="primary" name="heart"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+
+          <!-- Meal Title -->
+          <ion-card-header class="ion-no-padding">
+            <ion-text color="dark">
+              <h4 class="mealTitle ion-no-margin">{{item.name}}</h4>
+            </ion-text>
+          </ion-card-header>
+
+          <!-- Components -->
+          <ion-card-content class="ion-no-padding" *ngIf="storageService.showMealComponents">
+            <ion-list class="ion-no-padding" *ngFor="let component of item.components">
+              <ion-text color="dark">
+                {{component.name}}
+              </ion-text> <br>
+
+              <!-- Allergens -->
+              <ion-label class="ion-no-padding ion-no-margin" color="medium"
+                *ngIf="storageService.showAllergens && component.notices.length && allergens">
+                <ng-container *ngFor="let allergen of component.notices, let isLast=last">
+                  <ion-text class="allergens_danger" *ngIf="testSingleComponent(allergen); else color_normal"
+                    color='danger'>
+                    {{allergens[allergen].displayName}}{{isLast ? '' : ', '}}
+                  </ion-text>
+                  <ng-template #color_normal>
+                    <ion-text class="allergens_normal" color="medium">
+                      {{allergens[allergen].displayName}}{{isLast ? '' : ', '}}
+                    </ion-text>
+                  </ng-template>
+                </ng-container>
+              </ion-label>
+            </ion-list>
+          </ion-card-content>
+
+          <!-- Price Information -->
+          <ion-row class="priceRow ion-justify-content-right">
+            <ion-col class="priceCol ion-no-padding align-self-center" size="auto">
+              <ion-label class="priceLabel" expand="outline" *ngIf="item.prices && storageService.showPrices">S:
+                {{item.prices.s}}€</ion-label>
+            </ion-col>
+            <ion-col class="ion-no-padding align-self-center" size="auto">
+              <ion-label class="priceLabel" expand="outline" *ngIf="item.prices && storageService.showPrices">M:
+                {{item.prices.m}}€</ion-label>
+            </ion-col>
+            <ion-col class="ion-no-padding align-self-center" size="auto">
+              <ion-label class="priceLabel" expand="outline" *ngIf="item.prices && storageService.showPrices">G:
+                {{item.prices.g}}€</ion-label>
+            </ion-col>
+            <!-- Feedback text -->
+            <ion-col class="feedback ion-text-right ion-no-padding">
+              <ion-label class="feedback ion-text-right">{{ 'FEEDBACK.instruction' | translate }}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- Handle all counters closed case -->
+    <ion-text color="medium" class="ion-text-center"
+      *ngIf="storageService.showClosedCounters==false && areCountersOpened==false">
+      <h2> {{ 'COUNTERS.allCountersClosed' | translate }} </h2>
+    </ion-text>
+  </div>
+
+</ion-content>
+
+
+
+<!-- Footer with date selection -->
+<ion-footer *ngIf="networkStatus">
+  <ion-toolbar>
+    <ion-segment scrollable mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="selectedDate">
+      <ion-segment-button mode="md" *ngFor="let item of menus" value="{{ item.date }}">
+        <p class="ion-no-margin">{{ item.date | date:'EEE' : '' : translateService.currentLang }}</p>
+        <h6 class="ion-no-margin">{{ item.date | date:'d' }}</h6>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

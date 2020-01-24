@@ -1,0 +1,8 @@
+{
+  "name": "mensaarApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

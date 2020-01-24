@@ -1,0 +1,63 @@
+{
+    "BUTTONS": {},
+    "MENU": {
+        "setting": "Paramètres",
+        "languageSettingPlaceholder": "Sélectionnez une langue",
+        "mensaSettingPlaceholder": "Sélectionnez un restaurant universitaire",
+        "mealSetting": "Paramètres du repas",
+        "mealComponents": "Composants du repas",
+        "allergens": "Allergènes",
+        "prices": "Prix",
+        "closedCounters": "Comptoirs fermés",
+        "privacyNotice": "Avis de confidentialité",
+        "favoriteFoodPage": "Plats Préférés",
+        "filterAllergens": "Filtrer les Allergènes",
+        "darkmodeAutomatic": "Automatique",
+        "darkmodePlaceholder": "Sélectionnez Mode Luminosité"
+    },
+    "HOME": {
+        "title": "Mensas"
+    },
+    "MENSA": {
+        "title": "Mensa",
+        "noFavorite": "Pas de mensa préférée",
+        "noDataH1": "Aucun menu disponible.",
+        "noDataH2": "La cafétéria est peut-être fermée"
+    },
+    "COUNTERS": {
+        "openingHours": "Heures d'ouverture",
+        "allCountersClosed": "Tous les guichets sont fermés pour le moment."
+    },
+    "FEEDBACK": {
+        "instruction": "Evaluer",
+        "title": "Retour",
+        "OPTIONS": {
+            "delicious": "délicieux",
+            "little": "trop peu",
+            "sweet": "trop sucré",
+            "salty": "trop salé",
+            "expensive": "trop cher",
+            "fat": "trop gras",
+            "spicy": "trop épicé",
+            "bland": "sans saveur"
+        },
+        "feedbacktextarea": "Entrez vos commentaires ici",
+        "send": "Envoyer",
+        "errorAlertTitle": "Erreur",
+        "wrongInputTitle": "Attention",
+        "wrongInputSubTitle": "Saisie incorrecte",
+        "wrongInputMessage": "Vous n'avez pas fourni de feedback. Distributez des étoiles, choisissez l'une des options ou envoyez-nous un message via la zone de texte.",
+        "successToast": "Le retour a été transmis avec succès!"
+    },
+    "FAVORITEFOODPAGE": {
+        "title": "Plat Préféré",
+        "messageEmpty": "Vous n'avez pas préféré de repas jusqu'à présent."
+    },
+    "FOODALARM": {
+        "title": "Plat Préféré",
+        "message": "Servi aujourd'hui"
+    },
+    "INTERNET": {
+        "connection": "Pas de connexion internet"
+    }
+}
